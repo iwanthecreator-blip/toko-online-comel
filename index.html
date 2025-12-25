@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Comel | Toko Online Saya</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="shop-nav">
+        <div class="logo">E-<span>Comel</span></div>
+        <div class="cart-icon" onclick="bukaKeranjang()">
+            🛒 Keranjang: <span id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Selamat Datang di E-Comel</h1>
+        <p>Temukan barang impianmu dengan harga terbaik.</p>
+    </header>
+
+    <main class="container">
+        <div class="shop-tools">
+            <div class="search-box">
+                <input type="text" id="input-cari" placeholder="Cari barang impianmu..." onkeyup="cariBarang()">
+            </div>
+            
+            <div class="categories">
+                <button class="btn-cat active" onclick="filterKategori('semua')">Semua</button>
+                <button class="btn-cat" onclick="filterKategori('Elektronik')">Elektronik</button>
+                <button class="btn-cat" onclick="filterKategori('Aksesoris')">Aksesoris</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">Produk Terbaru</h2>
+        <div id="product-display" class="product-grid"></div>
+    </main>
+
+    <div id="modal-keranjang" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="tutupKeranjang()">&times;</span>
+            <h2>Keranjang Belanja</h2>
+            <div id="isi-keranjang">
+                <p>Keranjang masih kosong...</p>
+            </div>
+            <hr>
+            <div class="total-bayar">
+                <strong>Total: <span id="total-harga">Rp 0</span></strong>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Checkout Sekarang</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
