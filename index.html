@@ -3,55 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Comel | Toko Online Saya</title>
+    <title>Nexus Market | Toko Online Profesional</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="shop-nav">
-        <div class="logo">E-<span>Comel</span></div>
-        <div class="cart-icon" onclick="bukaKeranjang()">
-            🛒 Keranjang: <span id="cart-count">0</span>
+    <nav class="navbar">
+        <div class="logo" onclick="showPage('home')">NEXUS.</div>
+        <div class="nav-btns">
+            <span onclick="showPage('home')" style="cursor:pointer; font-weight:500;">Beranda</span>
+            <button class="btn" onclick="showPage('admin')" style="background:#f1f5f9;">Panel Admin</button>
+            <button class="btn btn-primary" onclick="showPage('checkout')">
+                Keranjang (<span id="cart-count">0</span>)
+            </button>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Selamat Datang di E-Comel</h1>
-        <p>Temukan barang impianmu dengan harga terbaik.</p>
-    </header>
+    <section id="page-home" class="page container">
+        <h2 style="font-size: 2rem; margin-bottom: 30px;">Koleksi Produk</h2>
+        <div id="product-list" class="grid"></div>
+    </section>
 
-    <main class="container">
-        <div class="shop-tools">
-            <div class="search-box">
-                <input type="text" id="input-cari" placeholder="Cari barang impianmu..." onkeyup="cariBarang()">
-            </div>
-            
-            <div class="categories">
-                <button class="btn-cat active" onclick="filterKategori('semua')">Semua</button>
-                <button class="btn-cat" onclick="filterKategori('Elektronik')">Elektronik</button>
-                <button class="btn-cat" onclick="filterKategori('Aksesoris')">Aksesoris</button>
-            </div>
+    <section id="page-admin" class="page container hidden">
+        <div class="form-container">
+            <h2 style="margin-top:0">Tambah Produk Baru</h2>
+            <form id="form-admin" onsubmit="tambahProduk(event)">
+                <input type="text" id="p-name" placeholder="Nama Barang" required>
+                <input type="number" id="p-price" placeholder="Harga (Contoh: 500000)" required>
+                <input type="text" id="p-img" placeholder="Link Gambar (URL)" required>
+                <textarea id="p-desc" rows="3" placeholder="Deskripsi Singkat"></textarea>
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px; padding:15px">Simpan ke Katalog</button>
+            </form>
         </div>
+    </section>
 
-        <h2 class="section-title">Produk Terbaru</h2>
-        <div id="product-display" class="product-grid"></div>
-    </main>
-
-    <div id="modal-keranjang" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="tutupKeranjang()">&times;</span>
-            <h2>Keranjang Belanja</h2>
-            <div id="isi-keranjang">
-                <p>Keranjang masih kosong...</p>
-            </div>
-            <hr>
-            <div class="total-bayar">
-                <strong>Total: <span id="total-harga">Rp 0</span></strong>
-            </div>
-            <button class="btn-checkout" onclick="checkout()">Checkout Sekarang</button>
+    <section id="page-checkout" class="page container hidden">
+        <div class="form-container">
+            <h2>Ringkasan Belanja</h2>
+            <div id="checkout-summary" style="margin-bottom:20px; background:#f8fafc; padding:15px; border-radius:10px"></div>
+            <form onsubmit="alert('Pesanan Terkirim ke Admin!'); localStorage.removeItem('cart'); location.reload();">
+                <input type="text" placeholder="Nama Lengkap" required>
+                <input type="text" placeholder="Nomor WhatsApp" required>
+                <textarea placeholder="Alamat Pengiriman Lengkap" required></textarea>
+                <button type="submit" class="btn btn-primary" style="width:100%; background:#059669">Konfirmasi Pesanan</button>
+            </form>
         </div>
-    </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
