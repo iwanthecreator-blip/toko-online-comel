@@ -12,7 +12,7 @@
         <div class="logo" onclick="showPage('home')">NEXUS.</div>
         <div class="nav-btns">
             <span onclick="showPage('home')" style="cursor:pointer; font-weight:500;">Beranda</span>
-            <button class="btn" onclick="showPage('admin')" style="background:#f1f5f9;">Panel Admin</button>
+            <button class="btn" onclick="aksesAdmin()" style="background:#f1f5f9;">Panel Admin</button>
             <button class="btn btn-primary" onclick="showPage('checkout')">
                 Keranjang (<span id="cart-count">0</span>)
             </button>
@@ -24,9 +24,22 @@
         <div id="product-list" class="grid"></div>
     </section>
 
+    <section id="page-login" class="page container hidden">
+        <div class="form-container" style="text-align: center;">
+            <h2 style="margin-top:0">Admin Authentication</h2>
+            <p>Masukkan password untuk mengakses panel.</p>
+            <input type="password" id="admin-password" placeholder="Password Admin">
+            <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="cekLogin()">Masuk</button>
+            <p id="login-error" style="color:red; font-size:0.8rem; margin-top:10px;" class="hidden">Password Salah!</p>
+        </div>
+    </section>
+
     <section id="page-admin" class="page container hidden">
         <div class="form-container">
-            <h2 style="margin-top:0">Tambah Produk Baru</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center">
+                <h2 style="margin-top:0">Tambah Produk</h2>
+                <button onclick="logoutAdmin()" style="color:red; cursor:pointer; background:none; border:none">Logout</button>
+            </div>
             <form id="form-admin" onsubmit="tambahProduk(event)">
                 <input type="text" id="p-name" placeholder="Nama Barang" required>
                 <input type="number" id="p-price" placeholder="Harga (Contoh: 500000)" required>
@@ -41,7 +54,7 @@
         <div class="form-container">
             <h2>Ringkasan Belanja</h2>
             <div id="checkout-summary" style="margin-bottom:20px; background:#f8fafc; padding:15px; border-radius:10px"></div>
-            <form onsubmit="alert('Pesanan Terkirim ke Admin!'); localStorage.removeItem('cart'); location.reload();">
+            <form onsubmit="prosesCheckout(event)">
                 <input type="text" placeholder="Nama Lengkap" required>
                 <input type="text" placeholder="Nomor WhatsApp" required>
                 <textarea placeholder="Alamat Pengiriman Lengkap" required></textarea>
